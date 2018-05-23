@@ -51,12 +51,8 @@ void loop(){
 
   Rdistance = SensorDistance(Rtrig, Recho);
   
-  Serial.print("LEFT SIDE: ");
-  Serial.print(Ldistance);
-  Serial.print("  RIGHT SIDE: ");
-  Serial.print(Rdistance);
-  Serial.println("");
-  
+  Displaydistancesensor(Ldistance, Rdistance);
+
   led(distance);
   
 }
