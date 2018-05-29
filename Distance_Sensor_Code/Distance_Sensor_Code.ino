@@ -2,8 +2,14 @@
 
   // Goal = Making Ultrasonic sensor working
   // defines pins numbers
-  const int trigPin = 6;
-  const int echoPin = 7;
+  const int Ltrig = 6;  //L = left
+  const int Lecho = 7;
+  const int Rtrig = 9;  //R = Right
+  const int Recho = 10;
+  const int LStrig = 0; //LS stands for Left side
+  const int LSecho = 0;
+  const int RStrig = 0; //RS stands for Right side
+  const int RSecho = 0;
 
   //LED RED
   int LEDR = 23;
@@ -12,43 +18,41 @@
   //LED ORANGE
   int LEDO = 24;
   // defines variables
-  long duration1;
-  int distance1;
+
+  int Ldistance;
+  int Rdistance;
+  int LSdistance;
+  int RSdistance;
+
   long duration;
   int distance;
   
 void setup() {
   
-  pinMode(trigPin, OUTPUT); // Sets the trigPin as an Output
-  pinMode(echoPin, INPUT); // Sets the echoPin as an Input
+  pinMode(Ltrig, OUTPUT); // Sets the trigPin as an Output
+  pinMode(Lecho, INPUT); // Sets the echoPin as an Input
+  pinMode(Rtrig, OUTPUT); // Sets the trigPin as an Output
+  pinMode(Recho, INPUT);
+  pinMode(LStrig, OUTPUT); // Sets the trigPin as an Output
+  pinMode(LSecho, INPUT);
+  pinMode(RStrig, OUTPUT); // Sets the trigPin as an Output
+  pinMode(RSecho, INPUT);
+
+  pinMode(LEDR, OUTPUT);
+  pinMode(LEDG, OUTPUT);
+  pinMode(LEDO, OUTPUT);
   Serial.begin(9600); // Starts the serial communication
   
 }
 
 void loop(){  
   // Clears the trigPin
-  digitalWrite(trigPin, LOW);
-  // Sets the trigPin on HIGH state for 10 micro seconds
-  delayMicroseconds(2);
-    
-  digitalWrite(trigPin, HIGH);
+  Ldistance = SensorDistance(Ltrig, Lecho);
 
-  delayMicroseconds(10);
-   
-  digitalWrite(trigPin, LOW);
-    
-  // Reads the echoPin, returns the sound wave travel time in microseconds
-  duration = pulseIn(echoPin, HIGH);
+  Rdistance = SensorDistance(Rtrig, Recho);
   
-  // Calculating the distance
-  distance = duration*0.034/2;
-  
-  // Prints the distance on the Serial Monitor
-  Serial.print("Distance: ");
-  Serial.println(distance);
-  
+  Displaydistancesensor(Ldistance, Rdistance);
+
   led(distance);
   
 }
-
-
