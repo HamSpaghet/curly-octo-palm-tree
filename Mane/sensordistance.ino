@@ -13,6 +13,17 @@
   duration = pulseIn(echoPin, HIGH);
 
   distance = duration*0.034/2;
-  
   return(distance);
   }
+
+  void sensordistancecombined(){
+    
+    Ldistance = sensordistance(Ltrig, Lecho);
+    
+    Rdistance = sensordistance(Rtrig, Recho);
+  
+    LSdistance = sensordistance(LStrig, LSecho);
+  
+    RSdistance = sensordistance(RStrig, RSecho);
+  }
+
