@@ -1,11 +1,21 @@
-#define ms 100  //1-255
-#define slowms 60
 void rijden(int rij){
+  if(ridestate != rij){
+    ridestate = rij;
+    ms = 0;
+  }
+  else 
+  if(ms < msmax) 
+    ms += msav;
+  else if(ms > msmax)
+    ms = msmax;
 
+  Serial.print("\t ROTATIONSPEED: ");
+  Serial.print(ms);
+    
   switch(rij){
 
     case 0:                   //STOP
-    
+      
       analogWrite(RmotorF, 0);
       analogWrite(RmotorB, 0);
       analogWrite(LmotorF, 0);
@@ -48,17 +58,10 @@ void rijden(int rij){
       analogWrite(LmotorF, ms);
       Serial.print("\t\t STATE: RIGHT");
       break;
-      
-    case 5:                   //SLOW FORWARD
-    
-      analogWrite(RmotorF, slowms);
-      analogWrite(RmotorB, 0);
-      analogWrite(LmotorF, slowms);
-      analogWrite(LmotorB, 0);
-      Serial.print("\t\t STATE: FORWARD SLOW");
-      break;
   }
 
   return;
 }
+
+
 

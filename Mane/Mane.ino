@@ -46,6 +46,10 @@
   
   const int LED = 0;
 
+  int ms;
+  int msmax = 200;
+  int msav = msmax / 5;
+
   int Ldistance;
   int Rdistance;
   int LSdistance;
@@ -62,10 +66,13 @@
   long duration;
   int distance;
 
-  int state = 0;  // stop = 0    start automatic = 1    start follow = 2
+  int state = 2;  // stop = 0    start automatic = 1    start follow = 2
   int rij = 0;      // STOP = 0   FORWARD = 1    BACK = 2    LEFT = 3   RIGHT = 4
-
-
+  int ridestate;
+  int insright = 0;
+  int insleft = 0;
+  int dir;
+  
 void setupSensor()
 {
   
@@ -107,8 +114,8 @@ void loop(){
   
   distancemath();
 
- // Displaydistancesensor(avleft, avright, avrightS, avleftS);
-  Displaydistancesensor(Ldistance, Rdistance, RSdistance, LSdistance);
+  Displaydistancesensor(avleft, avright, avrightS, avleftS);
+ // Displaydistancesensor(Ldistance, Rdistance, RSdistance, LSdistance);
 
   state = knob();
 
@@ -116,17 +123,20 @@ void loop(){
 
     case 0:
       rijden(0);
+      rijden(0);
     break;
 
     case 1:         //automatico
-      
+
+    case 2:           //volgen
+    volgen();
+
   }
   
-/*
-  graden = orientationsensor();
+
+ /* graden = orientationsensor();
   lcddisplay(graden);
 */
- // orientationsensor();
   Serial.println("");
 }
   
