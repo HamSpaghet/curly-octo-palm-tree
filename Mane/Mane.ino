@@ -107,8 +107,8 @@ void loop(){
   
   distancemath();
 
- // Displaydistancesensor(avleft, avright, avrightS, avleftS);
-  Displaydistancesensor(Ldistance, Rdistance, RSdistance, LSdistance);
+  Displaydistancesensor(avleft, avright, avrightS, avleftS);
+//Displaydistancesensor(Ldistance, Rdistance, RSdistance, LSdistance);
 
   state = knob();
 
@@ -119,7 +119,7 @@ void loop(){
     break;
 
     case 1:         //automatico
-      
+      automatic();
   }
   
 /*
