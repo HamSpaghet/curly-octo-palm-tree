@@ -59,7 +59,7 @@ void rijden(int rij){
       Serial.print("\t\t STATE: RIGHT");
       break;
   }
-
+   
   return;
 }
 

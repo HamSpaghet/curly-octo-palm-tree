@@ -26,10 +26,10 @@
   // defines pins numbers
   const int Ltrig = 50;  //L = left
   const int Lecho = 52;
-  const int LStrig = 46; //LS stands for Left side
-  const int LSecho = 48;
-  const int RStrig = 42; //RS stands for Right side
-  const int RSecho = 44;
+  const int LStrig = 42; //LS stands for Left side
+  const int LSecho = 44;
+  const int RStrig = 48; //RS stands for Right side
+  const int RSecho = 46;
   const int Rtrig = 38;  //R = Right
   const int Recho = 40;
 
@@ -46,8 +46,11 @@
   
   const int LED = 0;
 
-  int ms;
-  int msmax = 200;
+  int RBms;
+  int LBms;
+  int RFms;
+  int LFms;
+  int msmax = 250;
   int msav = msmax / 5;
 
   int Ldistance;
@@ -66,20 +69,24 @@
   long duration;
   int distance;
 
-  int state = 2;  // stop = 0    start automatic = 1    start follow = 2
+  int state = 1;  // stop = 0    start automatic = 1    start follow = 2
   int rij = 0;      // STOP = 0   FORWARD = 1    BACK = 2    LEFT = 3   RIGHT = 4
   int ridestate;
   int insright = 0;
   int insleft = 0;
   int dir;
   
+  int miniprev = 0;
+  int mini;
+  int maxiprev = 0;
+  int maxi;
 void setupSensor()
 {
   
   // 2.) Set the magnetometer sensitivity
-  lsm.setupMag(lsm.LSM9DS0_MAGGAIN_2GAUSS);
+  //lsm.setupMag(lsm.LSM9DS0_MAGGAIN_2GAUSS);
   //lsm.setupMag(lsm.LSM9DS0_MAGGAIN_4GAUSS);
-  //lsm.setupMag(lsm.LSM9DS0_MAGGAIN_8GAUSS)
+  lsm.setupMag(lsm.LSM9DS0_MAGGAIN_8GAUSS);
   //lsm.setupMag(lsm.LSM9DS0_MAGGAIN_12GAUSS);
 
 }
@@ -108,14 +115,16 @@ void setup() {
   
 }
 
-void loop(){  
-  // Clears the trigPin
+void usual(){
+
   sensordistancecombined();
   
   distancemath();
 
   Displaydistancesensor(avleft, avright, avrightS, avleftS);
  // Displaydistancesensor(Ldistance, Rdistance, RSdistance, LSdistance);
+ 
+  orientationsensor();
 
   state = knob();
 
@@ -123,21 +132,29 @@ void loop(){
 
     case 0:
       rijden(0);
-      rijden(0);
     break;
 
-    case 1:         //automatico
-
-    case 2:           //volgen
-    volgen();
-
+    case 1:  //automatico
+                
+      rijden(1);
+      break;
+    case 2:  //volgen
+    
+      volgen();
+      break;
   }
-  
+}
+
+void loop(){  
+
+  //  orientatiecalibratie();
+    usual();
 
  /* graden = orientationsensor();
   lcddisplay(graden);
 */
   Serial.println("");
 }
-  
+
+
 
