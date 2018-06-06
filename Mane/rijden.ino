@@ -1,5 +1,5 @@
 void rijden(int rij){
-  
+
   if(ridestate != rij){
     ridestate = rij;
     ms = 0;
@@ -17,10 +17,12 @@ void rijden(int rij){
 
     case 0:                   //STOP
       
+
       RFms = 0;
       LFms = 0;
       LBms = 0;
       RBms = 0;
+
       Serial.print("\t\t STATE: STOP");
       break;
       
@@ -60,11 +62,12 @@ void rijden(int rij){
        Serial.print("\t\t STATE: RIGHT");
     break;
   }
+  
       analogWrite(RmotorF, RFms);
       analogWrite(RmotorB, RBms);
       analogWrite(LmotorF, LFms);
       analogWrite(LmotorB, LBms);
-   
+  
   return;
 }
 
