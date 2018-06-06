@@ -50,6 +50,8 @@
   int LBms;
   int RFms;
   int LFms;
+  int ms;
+
   int msmax = 250;
   int msav = msmax / 5;
 

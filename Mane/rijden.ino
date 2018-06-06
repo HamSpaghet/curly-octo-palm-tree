@@ -1,4 +1,5 @@
 void rijden(int rij){
+
   if(ridestate != rij){
     ridestate = rij;
     ms = 0;
@@ -16,50 +17,57 @@ void rijden(int rij){
 
     case 0:                   //STOP
       
-      analogWrite(RmotorF, 0);
-      analogWrite(RmotorB, 0);
-      analogWrite(LmotorF, 0);
-      analogWrite(LmotorB, 0);
+
+      RFms = 0;
+      LFms = 0;
+      LBms = 0;
+      RBms = 0;
+
       Serial.print("\t\t STATE: STOP");
       break;
       
     case 1:                   //FORWARD
-    
-      analogWrite(RmotorF, ms);
-      analogWrite(RmotorB, 0);
-      analogWrite(LmotorF, ms);
-      analogWrite(LmotorB, 0);
+
+      RBms = 0;
+      LBms = 0;
+      RFms = ms;
+      LFms = ms;
       Serial.print("\t\t STATE: FORWARD");
-      break;
+    break;
       
     case 2:                   //BACKWARDS
-    
-      analogWrite(RmotorF, 0);
-      analogWrite(RmotorB, ms);
-      analogWrite(LmotorF, 0);
-      analogWrite(LmotorB, ms);
+
+      RFms = 0;
+      LFms = 0;
+      RBms = ms;
+      LBms = ms;
       Serial.print("\t\t STATE: BACK");
-      break;
+    break;
       
     case 3:                   //LEFT
-    
-      analogWrite(RmotorF, ms);
-      analogWrite(RmotorB, 0);
-      analogWrite(LmotorB, ms);
-      analogWrite(LmotorF, 0);
+
+      RBms = 0;
+      LFms = 0;
+      RFms = ms;
+      LBms = ms;
       Serial.print("\t\t STATE: LEFT");
-      break;
+    break;
       
     case 4:                   //RIGHT
-    
-      analogWrite(RmotorF, 0);
-      analogWrite(RmotorB, ms);
-      analogWrite(LmotorB, 0);
-      analogWrite(LmotorF, ms);
-      Serial.print("\t\t STATE: RIGHT");
-      break;
+
+       RFms = 0;
+       LBms = 0;
+       RBms = ms;
+       LFms = ms;
+       Serial.print("\t\t STATE: RIGHT");
+    break;
   }
-   
+  
+      analogWrite(RmotorF, RFms);
+      analogWrite(RmotorB, RBms);
+      analogWrite(LmotorF, LFms);
+      analogWrite(LmotorB, LBms);
+  
   return;
 }
 
