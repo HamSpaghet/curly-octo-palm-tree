@@ -8,5 +8,4 @@
   Serial.print(LSdistance);
   Serial.print("  RIGHT SIDE: ");
   Serial.print(RSdistance);
-  return;
   }
