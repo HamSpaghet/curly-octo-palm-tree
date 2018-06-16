@@ -14,11 +14,11 @@ void distancemath(){
      RSdistance = 200;
   }
 
-  avfront = (Ldistance + Rdistance + avfront)/3;
-  avleft = (Ldistance + avleft)/2;
-  avleftS = (LSdistance + avleftS)/2;
-  avright = (Rdistance + avright)/2;
-  avrightS = (RSdistance + avrightS)/2;
+  avfront = ((Ldistance + Rdistance)*2 + avfront)/5;
+  avleft = (Ldistance + avleft*2)/3;
+  avleftS = (LSdistance + avleftS*2)/3;
+  avright = (Rdistance + avright*2)/3;
+  avrightS = (RSdistance + avrightS*2)/3;
   
 }
 

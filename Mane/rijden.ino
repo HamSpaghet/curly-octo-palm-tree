@@ -1,64 +1,84 @@
-#define ms 100  //1-255
-#define slowms 60
 void rijden(int rij){
+  
+  if(ridestate != rij){
+    ridestate = rij;
+    ms = 0;
+  }
+  else 
+  if(ms < msmax) 
+    ms += msav;
+  else if(ms > msmax)
+    ms = msmax;
 
+  msL = ms - 20;
+  Serial.print("\t ROTATIONSPEED: ");
+  Serial.print(ms);
+    
   switch(rij){
 
     case 0:                   //STOP
-    
-      analogWrite(RmotorF, 0);
-      analogWrite(RmotorB, 0);
-      analogWrite(LmotorF, 0);
-      analogWrite(LmotorB, 0);
+      
+      RFms = 0;
+      LFms = 0;
+      LBms = 0;
+      RBms = 0;
       Serial.print("\t\t STATE: STOP");
+      lcd.setCursor(0,1);
+      lcd.print("RSTAND: STOP ");
       break;
       
     case 1:                   //FORWARD
-    
-      analogWrite(RmotorF, ms);
-      analogWrite(RmotorB, 0);
-      analogWrite(LmotorF, ms);
-      analogWrite(LmotorB, 0);
+
+      RBms = 0;
+      LBms = 0;
+      RFms = ms;
+      LFms = msL;
       Serial.print("\t\t STATE: FORWARD");
-      break;
+      lcd.setCursor(0,1);
+      lcd.print("RSTAND: FORW ");
+    break;
       
     case 2:                   //BACKWARDS
-    
-      analogWrite(RmotorF, 0);
-      analogWrite(RmotorB, ms);
-      analogWrite(LmotorF, 0);
-      analogWrite(LmotorB, ms);
+
+      RFms = 0;
+      LFms = 0;
+      RBms = ms;
+      LBms = msL;
       Serial.print("\t\t STATE: BACK");
-      break;
+      lcd.setCursor(0,1);
+      lcd.print("RSTAND: BACK ");
+    break;
       
     case 3:                   //LEFT
-    
-      analogWrite(RmotorF, ms);
-      analogWrite(RmotorB, 0);
-      analogWrite(LmotorB, ms);
-      analogWrite(LmotorF, 0);
+
+      RBms = 0;
+      LFms = 0;
+      RFms = ms;
+      LBms = msL;
       Serial.print("\t\t STATE: LEFT");
-      break;
+      lcd.setCursor(0,1);
+      lcd.print("RSTAND: LEFT ");
+    break;
       
     case 4:                   //RIGHT
-    
-      analogWrite(RmotorF, 0);
-      analogWrite(RmotorB, ms);
-      analogWrite(LmotorB, 0);
-      analogWrite(LmotorF, ms);
-      Serial.print("\t\t STATE: RIGHT");
-      break;
-      
-    case 5:                   //SLOW FORWARD
-    
-      analogWrite(RmotorF, slowms);
-      analogWrite(RmotorB, 0);
-      analogWrite(LmotorF, slowms);
-      analogWrite(LmotorB, 0);
-      Serial.print("\t\t STATE: FORWARD SLOW");
-      break;
-  }
 
+       RFms = 0;
+       LBms = 0;
+       RBms = ms;
+       LFms = msL;
+       Serial.print("\t\t STATE: RIGHT");
+      lcd.setCursor(0,1);
+      lcd.print("RSTAND: RIGHT");
+    break;
+  }
+  
+      analogWrite(RmotorF, RFms);
+      analogWrite(RmotorB, RBms);
+      analogWrite(LmotorF, LFms);
+      analogWrite(LmotorB, LBms);
+   
   return;
 }
+
+
 

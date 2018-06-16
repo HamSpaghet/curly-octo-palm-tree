@@ -1,13 +1,13 @@
 
 int knob(){
 
-  if(statepin == LOW)
+  if(digitalRead(statepin) == LOW)
   {
     if(state != 1 || state != 2)
       state = 1;
     else state = 0;
   }else 
-  if(followpin == LOW)
+  if(digitalRead(followpin) == LOW)
   {
     if(state != 1 || state != 2)
       state = 2;

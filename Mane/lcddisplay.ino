@@ -3,7 +3,6 @@ void lcddisplaysetup(){
 
   lcd.setBacklightPin(BACKLIGHT_PIN,POSITIVE);
   lcd.setBacklight(HIGH);
-  lcd.print("STATE");
     
 }
 
