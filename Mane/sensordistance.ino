@@ -21,9 +21,9 @@
     Ldistance = sensordistance(Ltrig, Lecho);
     
     Rdistance = sensordistance(Rtrig, Recho);
-  
+    
     LSdistance = sensordistance(LStrig, LSecho);
-  
+    
     RSdistance = sensordistance(RStrig, RSecho);
   }
 

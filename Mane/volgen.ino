@@ -2,17 +2,21 @@
 void volgen(){
       dir = avleft - avright; 
 
-      if(avfront > 15 && avfront < 25 /*&& avleft < 70 && avright < 70*/)              //forward
+      if(avfront > 15 && avfront < 30 && dir < 10 && dir > -10)              //forward
         rijden(1);
       else 
       if(avfront <= 10)   //back
        rijden(2);
       else
       if(dir < -10) //left
-        rijden(3);
+        if(Ldistance < 30 || Rdistance < 30)
+          rijden(3);
+        else rijden(0);
       else
       if(dir > 10)   //right  
-        rijden(4);
+        if(Ldistance < 30 || Rdistance < 30)
+          rijden(4);
+        else rijden(0);
       else rijden(0);
 }
 
