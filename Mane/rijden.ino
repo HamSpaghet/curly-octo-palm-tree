@@ -1,5 +1,5 @@
 void rijden(int rij){
-
+  
   if(ridestate != rij){
     ridestate = rij;
     ms = 0;
@@ -10,6 +10,7 @@ void rijden(int rij){
   else if(ms > msmax)
     ms = msmax;
 
+  msL = ms - 20;
   Serial.print("\t ROTATIONSPEED: ");
   Serial.print(ms);
     
@@ -17,13 +18,13 @@ void rijden(int rij){
 
     case 0:                   //STOP
       
-
       RFms = 0;
       LFms = 0;
       LBms = 0;
       RBms = 0;
-
       Serial.print("\t\t STATE: STOP");
+      lcd.setCursor(0,1);
+      lcd.print("RSTAND: STOP ");
       break;
       
     case 1:                   //FORWARD
@@ -31,8 +32,10 @@ void rijden(int rij){
       RBms = 0;
       LBms = 0;
       RFms = ms;
-      LFms = ms;
+      LFms = msL;
       Serial.print("\t\t STATE: FORWARD");
+      lcd.setCursor(0,1);
+      lcd.print("RSTAND: FORW ");
     break;
       
     case 2:                   //BACKWARDS
@@ -40,8 +43,10 @@ void rijden(int rij){
       RFms = 0;
       LFms = 0;
       RBms = ms;
-      LBms = ms;
+      LBms = msL;
       Serial.print("\t\t STATE: BACK");
+      lcd.setCursor(0,1);
+      lcd.print("RSTAND: BACK ");
     break;
       
     case 3:                   //LEFT
@@ -49,8 +54,10 @@ void rijden(int rij){
       RBms = 0;
       LFms = 0;
       RFms = ms;
-      LBms = ms;
+      LBms = msL;
       Serial.print("\t\t STATE: LEFT");
+      lcd.setCursor(0,1);
+      lcd.print("RSTAND: LEFT ");
     break;
       
     case 4:                   //RIGHT
@@ -58,8 +65,10 @@ void rijden(int rij){
        RFms = 0;
        LBms = 0;
        RBms = ms;
-       LFms = ms;
+       LFms = msL;
        Serial.print("\t\t STATE: RIGHT");
+      lcd.setCursor(0,1);
+      lcd.print("RSTAND: RIGHT");
     break;
   }
   
@@ -67,7 +76,7 @@ void rijden(int rij){
       analogWrite(RmotorB, RBms);
       analogWrite(LmotorF, LFms);
       analogWrite(LmotorB, LBms);
-  
+   
   return;
 }
 

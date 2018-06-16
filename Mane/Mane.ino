@@ -33,13 +33,13 @@
   const int Rtrig = 38;  //R = Right
   const int Recho = 40;
 
-  const int LmotorF = 2;  //F = Forward
-  const int LmotorB = 3;  //B = Backward
-  const int RmotorF = 4;  
-  const int RmotorB = 5;
+  const int LmotorF = 5;  //F = Forward
+  const int LmotorB = 4;  //B = Backward
+  const int RmotorF = 2;  
+  const int RmotorB = 3;
 
-  const int statepin = 53;
-  const int followpin = 51;
+  const int statepin = 10;
+  const int followpin = 11;
 
   const int RIR = 36;
   const int LIR = 34;
@@ -51,9 +51,9 @@
   int RFms;
   int LFms;
   int ms;
-
-  int msmax = 250;
-  int msav = msmax / 5;
+  int msL;
+  int msmax = 245;
+  int msav = msmax / 8;
 
   int Ldistance;
   int Rdistance;
@@ -82,6 +82,7 @@
   int mini;
   int maxiprev = 0;
   int maxi;
+  
 void setupSensor()
 {
   
@@ -129,19 +130,20 @@ void usual(){
   orientationsensor();
 
   state = knob();
-
+  lcd.setCursor(0,0);
   switch(state){
 
     case 0:
+      lcd.print("STATE: STOP");
       rijden(0);
     break;
 
     case 1:  //automatico
-                
+      lcd.print("STATE: AUTO");                
       rijden(1);
       break;
     case 2:  //volgen
-    
+      lcd.print("STATE: FOLLOW");
       volgen();
       break;
   }
