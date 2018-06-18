@@ -3,8 +3,9 @@ int knob(){
 
   if(digitalRead(statepin) == LOW)
   {
-    if(state != 1 || state != 2)
+    if(state != 1 || state != 2){
       state = 1;
+      rijdstop= 0;}
     else state = 0;
   }else 
   if(digitalRead(followpin) == LOW)

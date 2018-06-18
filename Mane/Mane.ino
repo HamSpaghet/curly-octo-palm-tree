@@ -46,14 +46,23 @@
   
   const int LED = 0;
 
+  //Rijden
+
   int RBms;
   int LBms;
   int RFms;
   int LFms;
   int ms;
   int msL;
-  int msmax = 245;
-  int msav = msmax / 8;
+  int msmax = 250;
+  int msav = msmax / 1;
+
+  int timer = 0;
+
+  int Ldir;
+  int plant;
+
+  int autob;
 
   int Ldistance;
   int Rdistance;
@@ -66,17 +75,22 @@
   int avleftS = 20;
   int avright = 20;
   int avrightS = 20;
+
+  int avrightP= 20;
+  int avleftP= 20;
   
   int graden;
+  
   long duration;
   int distance;
 
-  int state = 1;  // stop = 0    start automatic = 1    start follow = 2
+  int state = 0;  // stop = 0    start automatic = 1    start follow = 2
   int rij = 0;      // STOP = 0   FORWARD = 1    BACK = 2    LEFT = 3   RIGHT = 4
   int ridestate;
   int insright = 0;
   int insleft = 0;
   int dir;
+  int rijdstop= 0;
   
   int miniprev = 0;
   int mini;
@@ -139,8 +153,9 @@ void usual(){
     break;
 
     case 1:  //automatico
-      lcd.print("STATE: AUTO");                
-      rijden(1);
+      lcd.print("STATE: AUTO"); 
+                     
+      automatic();
       break;
     case 2:  //volgen
       lcd.print("STATE: FOLLOW");
