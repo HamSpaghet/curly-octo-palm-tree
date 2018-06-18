@@ -101,7 +101,7 @@ void setupSensor()
   //lsm.setupMag(lsm.LSM9DS0_MAGGAIN_12GAUSS);
 }
 
-//----------------------------SETUP ORIENTATIONSENSOR----------------------------//
+//-------------------------------------SETUP-------------------------------------//
 
 void setup() {
 
