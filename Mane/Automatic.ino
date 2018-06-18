@@ -1,5 +1,6 @@
 void automatic(){
 
+
   if((avleftP - avleftS) < 20 && (avrightP - avrightS) < 20){
     
     avrightP = avrightS;
@@ -60,6 +61,7 @@ void automatic(){
     lcd.print("OBST       ");
   }
   
+
 
 }
 
