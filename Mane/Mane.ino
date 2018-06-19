@@ -1,3 +1,5 @@
+//------------------------------INCLUDE LIBARY'S------------------------------//
+
 #include <Wire.h>
 #include <SPI.h>
 
@@ -7,8 +9,9 @@
 #include <LCD.h>
 #include <LiquidCrystal_I2C.h>
 
-//---------------USED FOR DISPLAY-----------------------//
-  #define I2C_ADDR    0x27 // <<----- Add your address here.  Find it from I2C Scanner
+//------------------------------USED FOR DISPLAY------------------------------//
+
+  #define I2C_ADDR    0x27
   #define BACKLIGHT_PIN     3
   #define En_pin  2
   #define Rw_pin  1
@@ -17,22 +20,24 @@
   #define D5_pin  5
   #define D6_pin  6
   #define D7_pin  7
-//-------------------------------------------------------//
+  
+//------------------------------ORIENTATIESENSOR------------------------------//
 
   // IIC
   Adafruit_LSM9DS0 lsm = Adafruit_LSM9DS0();
   LiquidCrystal_I2C  lcd(I2C_ADDR,En_pin,Rw_pin,Rs_pin,D4_pin,D5_pin,D6_pin,D7_pin);
-  
-  // defines pins numbers
+
+//-----------------------------DEFINE PIN NUMBERS-----------------------------//
+
   const int Ltrig = 50;  //L = left
   const int Lecho = 52;
   const int LStrig = 42; //LS stands for Left side
   const int LSecho = 44;
-  const int RStrig = 48; //RS stands for Right side
-  const int RSecho = 46;
   const int Rtrig = 38;  //R = Right
   const int Recho = 40;
-
+  const int RStrig = 48; //RS stands for Right side
+  const int RSecho = 46;
+  
   const int LmotorF = 5;  //F = Forward
   const int LmotorB = 4;  //B = Backward
   const int RmotorF = 2;  
@@ -69,7 +74,8 @@
   int LSdistance;
   int RSdistance;
   
-  //--AVERAGE DISTANCE
+ //------------------------------AVERAGE DISTANCE------------------------------//
+ 
   int avfront = 20;
   int avleft = 20;
   int avleftS = 20;
@@ -97,6 +103,8 @@
   int maxiprev = 0;
   int maxi;
   
+//---------------------------------Setup sensor---------------------------------//
+
 void setupSensor()
 {
   
@@ -105,12 +113,12 @@ void setupSensor()
   //lsm.setupMag(lsm.LSM9DS0_MAGGAIN_4GAUSS);
   lsm.setupMag(lsm.LSM9DS0_MAGGAIN_8GAUSS);
   //lsm.setupMag(lsm.LSM9DS0_MAGGAIN_12GAUSS);
-
 }
+
+//-------------------------------------SETUP-------------------------------------//
 
 void setup() {
 
-  /*-----------------SETUP ORIENTATIONSENSOR-----------------*/
   #ifndef ESP8266
   #endif
   Serial.println("LSM raw read demo");
@@ -123,7 +131,9 @@ void setup() {
   Serial.println("");
   Serial.println("");
 
-  /* ----------------pinmodes--------------------*/
+
+//-----------------------------------PINMODES-----------------------------------//
+
   pinmodes();
 
   lcddisplaysetup();
@@ -131,6 +141,8 @@ void setup() {
   Serial.begin(9600); // Starts the serial communication
   
 }
+
+//-------------------------------------Main-------------------------------------//
 
 void usual(){
 
@@ -163,6 +175,8 @@ void usual(){
       break;
   }
 }
+
+//------------------------------FUNCTIES ACTIVEREN------------------------------//
 
 void loop(){  
 
