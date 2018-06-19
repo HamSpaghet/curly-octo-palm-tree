@@ -78,7 +78,11 @@
 
   int avrightP= 20;
   int avleftP= 20;
-  
+  int leftmath;
+  int rightmath;
+
+  int stopped = 0;
+  int stoptimer = 0;
   int graden;
   
   long duration;
@@ -144,21 +148,21 @@ void usual(){
   orientationsensor();
 
   state = knob();
-  lcd.setCursor(0,0);
+
   switch(state){
 
     case 0:
-      lcd.print("STATE: STOP");
+      lcd.setCursor(0,0);
+      lcd.print("STATE: STANDBY     ");
       rijden(0);
     break;
 
     case 1:  //automatico
-      lcd.print("STATE: AUTO"); 
                      
       automatic();
       break;
     case 2:  //volgen
-      lcd.print("STATE: FOLLOW");
+
       volgen();
       break;
   }
