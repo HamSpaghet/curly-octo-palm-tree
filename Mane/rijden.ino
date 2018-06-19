@@ -24,7 +24,7 @@ void rijden(int rij){
       RBms = 0;
       Serial.print("\t\t STATE: STOP");
       lcd.setCursor(0,1);
-      lcd.print("RSTAND: STOP ");
+      lcd.print("RIJSTAND: STOP ");
       break;
       
     case 1:                   //FORWARD
@@ -35,7 +35,7 @@ void rijden(int rij){
       LFms = msL - 20;
       Serial.print("\t\t STATE: FORWARD");
       lcd.setCursor(0,1);
-      lcd.print("RSTAND: FORW ");
+      lcd.print("RIJSTAND: FORW ");
     break;
       
     case 2:                   //BACKWARDS
@@ -46,7 +46,7 @@ void rijden(int rij){
       LBms = msL;
       Serial.print("\t\t STATE: BACK");
       lcd.setCursor(0,1);
-      lcd.print("RSTAND: BACK ");
+      lcd.print("RIJSTAND: BACK ");
     break;
       
     case 3:                   //LEFT
@@ -57,7 +57,7 @@ void rijden(int rij){
       LBms = 0;
       Serial.print("\t\t STATE: LEFT");
       lcd.setCursor(0,1);
-      lcd.print("RSTAND: LEFT ");
+      lcd.print("RIJSTAND: LEFT ");
     break;
 
     case 4:
@@ -67,7 +67,28 @@ void rijden(int rij){
        LFms = msL;
        Serial.print("\t\t STATE: RIGHT");
         lcd.setCursor(0,1);
-        lcd.print("RSTAND: RIGHT");
+        lcd.print("RIJSTAND: RIGHT");
+    break;
+
+    case 5:
+
+      RBms = 0;
+      LFms = 0;
+      RFms = ms;
+      LBms = msL;
+      Serial.print("\t\t STATE: LEFT");
+      lcd.setCursor(0,1);
+      lcd.print("RIJSTAND: LEFT ");
+    break;
+    
+    case 6:
+       RFms = 0;
+       LBms = 0;
+       RBms = ms;
+       LFms = msL;
+       Serial.print("\t\t STATE: RIGHT");
+        lcd.setCursor(0,1);
+        lcd.print("RIJSTAND: RIGHT");
     break;
   }
       analogWrite(LmotorF, LFms);
